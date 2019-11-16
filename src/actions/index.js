@@ -1,7 +1,6 @@
 import axios from 'axios'
-//const ROOT_URL = 'https://tw2.lovesaemi.daemon.asia'
-//const ROOT_URL = 'https://localhost:31234'
-const ROOT_URL = ''
+//const ROOT_URL = '' // production
+const ROOT_URL = 'http://localhost:31234' // develop
 const TAGS = 'tags'
 const FAVOS = 'favos'
 export const READ_TAGS = "READ_TAGS"
