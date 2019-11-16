@@ -6,6 +6,7 @@ export const READ_TAGS = "READ_TAGS"
 export const READ_FAVOS = "READ_FAVOS"
 
 export const readFavos = values => async dispatch => {
+    console.log(values)
     var ar_qs = []
     if(values.tag) {
         ar_qs.push("tag=" + encodeURI(values.tag))
@@ -13,7 +14,7 @@ export const readFavos = values => async dispatch => {
     if(values.offset) {
         ar_qs.push("offset=" + values.offset * 10)
     } else {
-        ar_qs.push("offset=" + "0")
+        ar_qs.push("offset=0")
     }
     const qs = ar_qs.join("&")
     const response = await axios.get(`${ROOT_URL}/${FAVOS}?${qs}`)

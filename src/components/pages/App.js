@@ -1,5 +1,4 @@
 import React from 'react';
-import { Link } from "react-router-dom";
 import TitleAppBar from '../parts/Header'
 import MyCard from '../parts/Card'
 import {
@@ -7,6 +6,7 @@ import {
   readTags
 } from '../../actions'
 import {connect} from 'react-redux'
+import _ from 'lodash'
 
 class App extends React.Component {
 
@@ -15,15 +15,22 @@ class App extends React.Component {
     this.props.readTags()
   }
 
+  renderFavos() {
+    return _.map(this.props.favos.favos, favo => (
+      <MyCard key={favo.id} text={favo.txt}/>
+    ));
+  }
+
   render () {
+    console.log(this.props.favos)
     return <div className="App">
-      <TitleAppBar title='A'/>
-      <MyCard text="text1"/>
-      <MyCard text="text2"/>
-      <MyCard text="text3"/>      
+      <TitleAppBar title='A' tags={this.props.favos.tags}/>
+      {
+        this.renderFavos()
+      }
     </div>
   }
 }
-const mapStateToProps = state => ({favos: state.favos })
+const mapStateToProps = state => ({favos: state.favos})
 const mapDispatchToProps = ({readTags,readFavos})
 export default connect(mapStateToProps,mapDispatchToProps)(App);

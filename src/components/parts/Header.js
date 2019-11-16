@@ -4,20 +4,28 @@ import Toolbar from "@material-ui/core/Toolbar";
 import Select from "@material-ui/core/Select";
 import MenuItem from "@material-ui/core/MenuItem";
 import { makeStyles } from "@material-ui/core/styles";
+import {
+  readFavos,
+} from '../../actions'
+import {connect} from 'react-redux'
+import _ from 'lodash'
 
 const useStyles = makeStyles(theme => ({
   formControl: {
-    margin: theme.spacing(1),
-    minWidth: "100%",
+    margin: "0 auto",
+    minWidth: "98%",
     color: "#FFF"
   },
 }));
 
 function TitleAppBar(props) {
   const classes = useStyles();
-  const [age,setAge] = React.useState("");
+  const [selectValue,setSelectValue] = React.useState("");
   const handleChange = event => {
-    setAge(event.target.value);
+    setSelectValue(event.target.value);
+    console.log(event.target.value);
+    console.log(props);
+    props.readFavos({tag: event.target.value});
   };
   
   return (
@@ -25,13 +33,16 @@ function TitleAppBar(props) {
       <AppBar position="static">
         <Toolbar>
           <Select
-            value={age}
+            value={selectValue}
             onChange={handleChange}
             className={classes.formControl}
           >
-            <MenuItem value={10}>Ten</MenuItem>
-            <MenuItem value={20}>Twenty</MenuItem>
-            <MenuItem value={30}>Thirty</MenuItem>
+          <MenuItem key="::::NULL::::" value="::::NULL::::">未設定</MenuItem>
+          {
+            _.map(props.tags, tag => (
+              <MenuItem key={tag} value={tag}>{tag}</MenuItem>
+            ))
+          }
           </Select>
         </Toolbar>
       </AppBar>
@@ -39,4 +50,6 @@ function TitleAppBar(props) {
   );
 }
 
-export default TitleAppBar;
+const mapDispatchToProps = ({readFavos})
+export default connect(null,mapDispatchToProps)(TitleAppBar);
+
