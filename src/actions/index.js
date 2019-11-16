@@ -1,5 +1,5 @@
 import axios from 'axios'
-const ROOT_URL = 'http://127.0.0.1:31234/'
+const ROOT_URL = 'https://tw2bkend.lovesaemi.daemon.asia/'
 const TAGS = 'tags'
 const FAVOS = 'favos'
 export const READ_TAGS = "READ_TAGS"
