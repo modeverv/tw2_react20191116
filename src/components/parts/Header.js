@@ -23,14 +23,13 @@ function TitleAppBar(props) {
   const [selectValue,setSelectValue] = React.useState("");
   const handleChange = event => {
     setSelectValue(event.target.value);
-    console.log(event.target.value);
-    console.log(props);
-    props.readFavos({tag: event.target.value});
+    window.scrollTo(0,0)
+    props.readFavos({tag: event.target.value, offset: 0, renew: true});
   };
   
   return (
     <div className={classes.root}>
-      <AppBar position="static">
+      <AppBar position="fixed">
         <Toolbar>
           <Select
             value={selectValue}

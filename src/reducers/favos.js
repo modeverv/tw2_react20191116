@@ -3,22 +3,26 @@ import {
     READ_TAGS,
 } from '../actions'
 
-export default (datas = {}, action) => {
+export default (datas = {favos: []}, action) => {
     switch (action.type) {
         case READ_FAVOS:
-            //console.log(action.response.data)
+            console.log(action);
             var raws = action.response.data
-            var favos = []
+            if(action.renew) {
+                datas.favos = []
+            }
+            var favos = datas.favos
+            console.log(favos)
             for(var i=0,l=raws.length;i<l;i++){
                 var x = raws[i]
                 x.body = JSON.parse(x.body);
                 favos.push(x)
             }
-            return { ...datas, favos}
+            const offset = action.offset
+            const tag = action.tag
+            return { ...datas, favos, offset, tag}
         case READ_TAGS:
-            //console.log(action.response.data)
             const tags = action.response.data
-            //console.log(tags)
             return {...datas, tags }
         default:
             return datas
